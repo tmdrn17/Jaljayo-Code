@@ -14,12 +14,15 @@ public enum LogKind
 
 public class RotatingLog : MonoBehaviour
 {
-    private const float SlideMaxZ = 43f;
-    private const float SlideMinZ = 39f;
-    private const float SlideSpeed = 0.6f;
-    private static readonly Vector3 OrbitCenter = new Vector3(0, 2.7f, 58);
-
     [SerializeField] private LogKind kind;
+
+    [Header("SlidingSpin 왕복")]
+    [SerializeField] private float slideMaxZ = 43f;
+    [SerializeField] private float slideMinZ = 39f;
+    [SerializeField] private float slideSpeed = 0.6f;
+
+    [Header("OrbitSpin 공전")]
+    [SerializeField] private Vector3 orbitCenter = new Vector3(0, 2.7f, 58);
 
     // 왕복 방향 (1 또는 -1). 처음엔 0이라 범위를 벗어나기 전까지 움직이지 않는다.
     private int slideDirection;
@@ -31,7 +34,7 @@ public class RotatingLog : MonoBehaviour
             case LogKind.SlidingSpin:
                 Spin(-100f);
                 UpdateSlideDirection();
-                transform.Translate(Vector3.forward * SlideSpeed * slideDirection * Time.deltaTime, Space.World);
+                transform.Translate(Vector3.forward * slideSpeed * slideDirection * Time.deltaTime, Space.World);
                 break;
 
             case LogKind.Spin150:
@@ -40,7 +43,7 @@ public class RotatingLog : MonoBehaviour
 
             case LogKind.OrbitSpin:
                 Spin(100f);
-                transform.RotateAround(OrbitCenter, Vector3.right, 40 * Time.deltaTime);
+                transform.RotateAround(orbitCenter, Vector3.right, 40 * Time.deltaTime);
                 break;
 
             case LogKind.ReverseSpin170A:
@@ -68,11 +71,11 @@ public class RotatingLog : MonoBehaviour
     {
         float currentPosZ = transform.position.z;
 
-        if (currentPosZ > SlideMaxZ)
+        if (currentPosZ > slideMaxZ)
         {
             slideDirection = -1;
         }
-        else if (currentPosZ < SlideMinZ)
+        else if (currentPosZ < slideMinZ)
         {
             slideDirection = 1;
         }

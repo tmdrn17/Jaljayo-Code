@@ -3,11 +3,12 @@ using UnityEngine;
 // 바람 발판. 날개를 돌리고, 안에 있는 플레이어를 위로 띄운다.
 public class WindPanel : MonoBehaviour
 {
-    private const float FanSpeed = 2000f;
-    private const float LiftImpulse = 0.6f;
-    private const float FallLiftImpulse = 0.1f;
-
     [SerializeField] private GameObject[] windPanel;
+
+    [Header("바람")]
+    [SerializeField] private float fanSpeed = 2000f;
+    [SerializeField] private float liftImpulse = 0.6f;
+    [SerializeField] private float fallLiftImpulse = 0.1f;
 
     private Player player;
     private bool isWindPanel;
@@ -16,7 +17,7 @@ public class WindPanel : MonoBehaviour
     {
         for (int i = 0; i < windPanel.Length; i++)
         {
-            windPanel[i].transform.Rotate(Vector3.up * FanSpeed * Time.deltaTime, Space.World);
+            windPanel[i].transform.Rotate(Vector3.up * fanSpeed * Time.deltaTime, Space.World);
         }
     }
 
@@ -24,7 +25,7 @@ public class WindPanel : MonoBehaviour
     {
         if (isWindPanel == false) return;
 
-        player.Rig.AddForce(Vector3.up * LiftImpulse, ForceMode.Impulse);
+        player.Rig.AddForce(Vector3.up * liftImpulse, ForceMode.Impulse);
 
         // 옆으로는 움직이지 못하게 가로 속도를 없앤다
         float y = player.Rig.velocity.y;
@@ -32,7 +33,7 @@ public class WindPanel : MonoBehaviour
 
         if (player.Rig.velocity.y < 0)
         {
-            player.Rig.AddForce(Vector3.up * FallLiftImpulse, ForceMode.Impulse);
+            player.Rig.AddForce(Vector3.up * fallLiftImpulse, ForceMode.Impulse);
         }
     }
 

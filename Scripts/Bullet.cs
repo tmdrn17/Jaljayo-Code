@@ -11,9 +11,6 @@ public enum BulletType
 // 보스·함정이 쏘는 투사체와 플레이어가 던지는 봉투. 종류에 따라 닿았을 때의 처리가 다르다.
 public class Bullet : MonoBehaviour
 {
-    private const string BossTag = "Boss";
-    private const string FloorTag = "Floor";
-
     [SerializeField] private int damage;
     [SerializeField] private BulletType bulletType;
     [SerializeField] private AudioClip damagedSound;
@@ -33,7 +30,7 @@ public class Bullet : MonoBehaviour
         switch (bulletType)
         {
             case BulletType.Envelope:
-                if (col.CompareTag(Tags.Wall) || col.CompareTag(BossTag)) Destroy(gameObject);
+                if (col.CompareTag(Tags.Wall) || col.CompareTag(Tags.Boss)) Destroy(gameObject);
                 break;
 
             case BulletType.File:
@@ -41,7 +38,7 @@ public class Bullet : MonoBehaviour
                 break;
 
             case BulletType.Lamp:
-                HitPlayerOrDestroy(col, FloorTag);
+                HitPlayerOrDestroy(col, Tags.Floor);
                 break;
 
             case BulletType.Spike:

@@ -6,10 +6,6 @@ using UnityEngine.SceneManagement;
 // 씬별 제한 시간은 GameManager가 씬 로드 때 정한다.
 public class CountDown : MonoBehaviour
 {
-    // 빌드에 없는 씬 이름
-    private const string MainHallScene = "MainHall";
-    private const string TestSceneName = "TestScene";
-
     [SerializeField] private Text countdownText;
 
     private void Start()
@@ -41,13 +37,13 @@ public class CountDown : MonoBehaviour
 
     private bool IsTimerPausedScene(string sceneName)
     {
-        return sceneName == MainHallScene || sceneName == SceneNames.Title || sceneName == SceneNames.GameFail
-            || sceneName == SceneNames.BossRoom || sceneName == TestSceneName || sceneName == SceneNames.SecondFloor;
+        return sceneName == SceneNames.MainHall || sceneName == SceneNames.Title || sceneName == SceneNames.GameFail
+            || sceneName == SceneNames.BossRoom || sceneName == SceneNames.TestScene || sceneName == SceneNames.SecondFloor;
     }
 
     private bool IsTextHiddenScene(string sceneName)
     {
-        return sceneName == MainHallScene || sceneName == SceneNames.Title || sceneName == TestSceneName
+        return sceneName == SceneNames.MainHall || sceneName == SceneNames.Title || sceneName == SceneNames.TestScene
             || sceneName == SceneNames.BossRoom || sceneName == SceneNames.SecondFloor;
     }
 }

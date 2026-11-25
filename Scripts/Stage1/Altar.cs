@@ -3,7 +3,6 @@ using UnityEngine;
 // 쪽지 제단(메인홀). 모은 쪽지를 올려 4장을 채우면 완성된 쪽지가 나오고 보스 문이 열린다.
 public class Altar : MonoBehaviour
 {
-    private const string InteractionButton = "Interaction";
     private static readonly int OpenHash = Animator.StringToHash("Open");
 
     [SerializeField] private GameObject[] deadPapers;
@@ -40,7 +39,7 @@ public class Altar : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        if (Input.GetButtonDown(InteractionButton) == false) return;
+        if (Input.GetButtonDown(InputNames.Interaction) == false) return;
 
         if (other.CompareTag(Tags.Player) && GameManager.Instance.PaperNum >= 0)
         {

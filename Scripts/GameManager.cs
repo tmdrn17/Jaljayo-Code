@@ -5,9 +5,6 @@ using UnityEngine.SceneManagement;
 // 게임 전체 진행(씬 로드 후 배치, 일시정지, 퍼즐 창, 제한 시간, 쪽지, 1층 클리어, 게임 오버)을 관리한다. 씬이 바뀌어도 유지된다.
 public class GameManager : SingletonBase<GameManager>
 {
-    private const string SpawnPointTag = "SpawnPoint";
-    private const string CancelButtonName = "Cancel";
-
     // 게임 UI(캔버스·얼굴 캠)를 숨기는 씬: 타이틀, 클리어, 실패
     private static readonly HashSet<string> MenuScenes = new HashSet<string>
     {
@@ -135,7 +132,7 @@ public class GameManager : SingletonBase<GameManager>
 
     private void PlaceCharacter()
     {
-        SpawnPoint = GameObject.FindWithTag(SpawnPointTag);
+        SpawnPoint = GameObject.FindWithTag(Tags.SpawnPoint);
 
         if (IsLoad)
         {
@@ -179,7 +176,7 @@ public class GameManager : SingletonBase<GameManager>
     #region 일시정지
     private void HandlePauseInput()
     {
-        if (Input.GetButtonDown(CancelButtonName) == false) return;
+        if (Input.GetButtonDown(InputNames.Cancel) == false) return;
 
         if (IsPause == false)
         {

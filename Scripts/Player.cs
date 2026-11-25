@@ -5,17 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     #region 상수
-    private const string StatueTag = "Statue";
-    private const string AnswerAreaTag = "AnswerArea";
-    private const string AnswerButtonTag = "AnswerButton";
-    private const string KeyPadTag = "KeyPad";
-    private const string ButtonTag = "Button";
-    private const string WaterTag = "Water";
-    private const string JumpItemTag = "Item_Jump";
-    private const string DocumentItemTag = "Item_document";
-    private const string EnemyTag = "Enemy";
-    private const string GroundTag = "Ground";
-
+    // 이 클래스만 찾는 씬 오브젝트 이름. 태그·입력 이름은 Core의 Tags·InputNames에 있다.
     private const string GateOpenLeverName = "GateOpenLaber";
     private const string FirstNpcName = "Npc3";
     private const string SecondNpcName = "Npc4";
@@ -23,7 +13,6 @@ public class Player : MonoBehaviour
     private const string OXQuizName = "OXQuiz";
     private const string FindPictureName = "FindPicture";
     private const string AltarName = "Altar";
-    private const string UIManagerName = "UIManager";
 
     private static readonly int WalkHash = Animator.StringToHash("IsWalk");
     private static readonly int RunHash = Animator.StringToHash("IsRun");
@@ -142,12 +131,12 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(JumpItemTag)) EnterJumpItem();
+        if (other.CompareTag(Tags.JumpItem)) EnterJumpItem();
         if (other.name == GateOpenLeverName) Destroy(wall);
-        if (other.CompareTag(AnswerAreaTag)) isAreaIn = true;
-        if (other.CompareTag(WaterTag)) transform.position = GameManager.Instance.SpawnPoint.transform.position;
+        if (other.CompareTag(Tags.AnswerArea)) isAreaIn = true;
+        if (other.CompareTag(Tags.Water)) transform.position = GameManager.Instance.SpawnPoint.transform.position;
         if (other.CompareTag(Tags.Bullet)) EnterBullet(other);
-        if (other.CompareTag(DocumentItemTag)) EnterDocument(other.gameObject);
+        if (other.CompareTag(Tags.DocumentItem)) EnterDocument(other.gameObject);
         if (other.CompareTag(Tags.Spike) || other.CompareTag(Tags.SliceWall)) EnterSpike();
     }
 
@@ -159,13 +148,13 @@ public class Player : MonoBehaviour
         StayQuiz(other);
 
         if (other.gameObject.name == FloorRoomName) Cursor.visible = true;
-        if (other.CompareTag(ButtonTag)) StayButton(other);
+        if (other.CompareTag(Tags.Button)) StayButton(other);
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag(AnswerAreaTag)) isAreaIn = false;
-        if (other.CompareTag(StatueTag)) NearObj = null;
+        if (other.CompareTag(Tags.AnswerArea)) isAreaIn = false;
+        if (other.CompareTag(Tags.Statue)) NearObj = null;
 
         if (other.gameObject.name == FirstNpcName) nearNpc[0] = false;
         if (other.gameObject.name == SecondNpcName) nearNpc[1] = false;
@@ -175,10 +164,10 @@ public class Player : MonoBehaviour
     void OnCollisionEnter(Collision other)
     {
         // 적에게 닿으면 체력 감소
-        if (other.gameObject.CompareTag(EnemyTag)) GameSession.ApplyDamage(1);
+        if (other.gameObject.CompareTag(Tags.Enemy)) GameSession.ApplyDamage(1);
 
         // 바닥에 닿으면 점프 상태 해제
-        if (other.gameObject.CompareTag(GroundTag)) IsJump = false;
+        if (other.gameObject.CompareTag(Tags.Ground)) IsJump = false;
     }
     #endregion
 
@@ -197,10 +186,10 @@ public class Player : MonoBehaviour
     #region 이동
     private void ReadInput()
     {
-        haxis = Input.GetAxisRaw("Horizontal");
-        vaxis = Input.GetAxisRaw("Vertical");
-        isJumpDown = Input.GetButtonDown("Jump");
-        isInteractDown = Input.GetButtonDown("Interaction"); // 상호작용 E 버튼
+        haxis = Input.GetAxisRaw(InputNames.Horizontal);
+        vaxis = Input.GetAxisRaw(InputNames.Vertical);
+        isJumpDown = Input.GetButtonDown(InputNames.Jump);
+        isInteractDown = Input.GetButtonDown(InputNames.Interaction); // 상호작용 E 버튼
     }
 
     private void Move()
@@ -312,7 +301,7 @@ public class Player : MonoBehaviour
         // 1. 모형에 다가가 E를 누르고, 점프 중이 아닐 때
         if (isInteractDown && NearObj != null && IsJump == false)
         {
-            if (NearObj.CompareTag(StatueTag)) PickUpStatue();
+            if (NearObj.CompareTag(Tags.Statue)) PickUpStatue();
             if (isAreaIn) PlaceStatue();
         }
 
@@ -351,7 +340,7 @@ public class Player : MonoBehaviour
 
     private void OpenQuest(int index)
     {
-        uiManager = GameObject.Find(UIManagerName).GetComponent<Stage2UI>();
+        uiManager = GameObject.Find(ObjectNames.UIManager).GetComponent<Stage2UI>();
         uiManager.ShowQuest(index);
 
         Time.timeScale = 0;
@@ -360,7 +349,7 @@ public class Player : MonoBehaviour
     private void StayStatue(Collider other)
     {
         // 모형에 접촉 중이고 손이 비어 있으면 NearObj에 담는다
-        if ((other.CompareTag(StatueTag) && hasStatue == false) || other.CompareTag(AnswerButtonTag))
+        if ((other.CompareTag(Tags.Statue) && hasStatue == false) || other.CompareTag(Tags.AnswerButton))
         {
             NearObj = other.gameObject;
         }
@@ -368,7 +357,7 @@ public class Player : MonoBehaviour
 
     private void StayKeyPad(Collider other)
     {
-        if (other.CompareTag(KeyPadTag) == false || isInteractDown == false) return;
+        if (other.CompareTag(Tags.KeyPad) == false || isInteractDown == false) return;
 
         Cursor.visible = true;
         keyPad.SetActive(true);
@@ -421,7 +410,7 @@ public class Player : MonoBehaviour
 
     private void EnterDocument(GameObject document)
     {
-        uiManager = GameObject.Find(UIManagerName).GetComponent<Stage2UI>();
+        uiManager = GameObject.Find(ObjectNames.UIManager).GetComponent<Stage2UI>();
 
         document.SetActive(false);
         ItemIndex++;

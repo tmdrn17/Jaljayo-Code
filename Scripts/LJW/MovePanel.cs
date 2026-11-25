@@ -5,12 +5,13 @@ public class MovePanel : MonoBehaviour
 {
     private const string RightMoveName = "RightMove";
     private const string LeftMoveName = "LeftMove";
-    private const float PanelSpeed = 2.5f;
-    private const float DoorRotateSpeed = 100f;
-
     [SerializeField] private GameObject movePanel;
     [SerializeField] private Transform movePos;
     [SerializeField] private GameObject dLow;
+
+    [Header("속도")]
+    [SerializeField] private float panelSpeed = 2.5f;
+    [SerializeField] private float doorRotateSpeed = 100f;
 
     private Player player;
     private bool isMove;
@@ -19,7 +20,7 @@ public class MovePanel : MonoBehaviour
     {
         if (isMove)
         {
-            movePanel.transform.position = Vector3.MoveTowards(movePanel.transform.position, movePos.position, PanelSpeed * Time.deltaTime);
+            movePanel.transform.position = Vector3.MoveTowards(movePanel.transform.position, movePos.position, panelSpeed * Time.deltaTime);
         }
     }
 
@@ -40,11 +41,11 @@ public class MovePanel : MonoBehaviour
 
         if (gameObject.name == RightMoveName)
         {
-            dLow.transform.Rotate(transform.forward * -DoorRotateSpeed * Time.deltaTime, Space.World);
+            dLow.transform.Rotate(transform.forward * -doorRotateSpeed * Time.deltaTime, Space.World);
         }
         else if (gameObject.name == LeftMoveName)
         {
-            dLow.transform.Rotate(transform.forward * DoorRotateSpeed * Time.deltaTime, Space.World);
+            dLow.transform.Rotate(transform.forward * doorRotateSpeed * Time.deltaTime, Space.World);
         }
     }
 

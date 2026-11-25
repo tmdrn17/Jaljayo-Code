@@ -13,9 +13,6 @@ public class QuizItem
 // 2층 퀴즈 미니게임. 10문제를 맞히면 미션 클리어, 목숨이 다 떨어지면 피해를 받고 처음부터 다시 한다.
 public class OXQuiz : MonoBehaviour
 {
-    private const string SubmitButton = "Submit";
-    private const int ClearAnswerCount = 10;
-
     [Header("입력·문제")]
     [SerializeField] private InputField inputAnswer;
     [SerializeField] private QuizItem[] quizItems;
@@ -53,7 +50,7 @@ public class OXQuiz : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown(SubmitButton) == false) return;
+        if (Input.GetButtonDown(InputNames.Submit) == false) return;
 
         if (inputAnswer.text == quizItems[currentIndex].Answer)
         {
@@ -82,7 +79,7 @@ public class OXQuiz : MonoBehaviour
         correctCount++;
         answerCountText.text = correctCount.ToString();
 
-        if (currentIndex == ClearAnswerCount)
+        if (currentIndex == quizItems.Length)
         {
             SecondFloorManager.AddMissionClear();
             GameManager.Instance.ExitPuzzle(true);

@@ -5,8 +5,6 @@ using UnityEngine.UI;
 public class Stage2UI : MonoBehaviour
 {
     private const string FourthRoomSpawnName = "4thRoomSpawn";
-    private const int ItemMissionCount = 5;
-    private const int DragMissionCount = 2;
 
     [Header("퀘스트")]
     [SerializeField] private GameObject[] quest;
@@ -19,6 +17,10 @@ public class Stage2UI : MonoBehaviour
     [SerializeField] private Image clearImage3;
     [SerializeField] private Image clearImage4;
     [SerializeField] private Text roomEscape;
+
+    [Header("미션 목표")]
+    [SerializeField] private int itemMissionCount = 5;
+    [SerializeField] private int dragMissionCount = 2;
 
     private int correct = 0;
 
@@ -62,7 +64,7 @@ public class Stage2UI : MonoBehaviour
     {
         score.text = collectedCount.ToString();
 
-        if (collectedCount != ItemMissionCount) return;
+        if (collectedCount != itemMissionCount) return;
 
         SecondFloorManager.AddMissionClear();
         clearImage3.gameObject.SetActive(true);
@@ -78,7 +80,7 @@ public class Stage2UI : MonoBehaviour
 
     private void Complete()
     {
-        if (correct != DragMissionCount) return;
+        if (correct != dragMissionCount) return;
 
         SecondFloorManager.AddMissionClear();
         clearImage4.gameObject.SetActive(true);

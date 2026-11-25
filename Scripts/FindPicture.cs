@@ -4,8 +4,6 @@ using UnityEngine.UI;
 // 틀린 그림 찾기 미니게임. 클릭한 곳에 O/X 표시를 만들고 기회를 센다.
 public class FindPicture : MonoBehaviour
 {
-    private const string ImageTag = "Image";
-    private const string RightButtonTag = "RightButton";
     private const string FindCanvasName = "FindCanvas";
     private const int WrongKind = 1;
     private const int RightKind = 2;
@@ -65,7 +63,7 @@ public class FindPicture : MonoBehaviour
     public void RightClick()
     {
         // 맞는 곳 버튼이 하나만 남았을 때(마지막 정답)만 클리어
-        if (GameObject.FindGameObjectsWithTag(RightButtonTag).Length != 1) return;
+        if (GameObject.FindGameObjectsWithTag(Tags.RightButton).Length != 1) return;
 
         SecondFloorManager.AddMissionClear();
         GameManager.Instance.ExitPuzzle(true);
@@ -75,7 +73,7 @@ public class FindPicture : MonoBehaviour
 
     private void DestroyMarks()
     {
-        GameObject[] marks = GameObject.FindGameObjectsWithTag(ImageTag);
+        GameObject[] marks = GameObject.FindGameObjectsWithTag(Tags.Image);
         for (int i = 0; i < marks.Length; i++)
         {
             Destroy(marks[i]);

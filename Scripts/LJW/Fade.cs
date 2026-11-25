@@ -4,8 +4,6 @@ using UnityEngine;
 // 씬 시작 때 막을 걷고 스테이지 이름을 잠깐 보여 준다. 플레이어가 닿으면 막을 덮는다.
 public class Fade : MonoBehaviour
 {
-    private const string PlayerTag = "Player";
-
     [SerializeField] private GameObject startingSceneTransition;
     [SerializeField] private GameObject endingSceneTransition;
     [SerializeField] private Animator stageUI;
@@ -27,7 +25,7 @@ public class Fade : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.CompareTag(PlayerTag) == false) return;
+        if (col.gameObject.CompareTag(Tags.Player) == false) return;
 
         endingSceneTransition.SetActive(true);
     }

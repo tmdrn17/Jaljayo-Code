@@ -36,8 +36,8 @@ public class CameraArm : MonoBehaviour
     {
         if (GameManager.Instance.IsMoveLocked) return;
 
-        rotX += Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
-        rotY += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
+        rotX += Input.GetAxis(InputNames.MouseY) * sensitivity * Time.deltaTime;
+        rotY += Input.GetAxis(InputNames.MouseX) * sensitivity * Time.deltaTime;
 
         rotX = Mathf.Clamp(rotX, -clampAngle, clampAngle);
         transform.rotation = Quaternion.Euler(-rotX, rotY, 0);

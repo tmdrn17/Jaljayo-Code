@@ -10,8 +10,6 @@ public class Spike : PingPongMover
         LeftRight
     }
 
-    private const string SideSpikeTag = "SideSpike";
-
     private SpikeMove moveKind;
     private float initPosition;
 
@@ -25,7 +23,7 @@ public class Spike : PingPongMover
                 SetRange(initPosition);
                 break;
             case Tags.SliceWall:
-            case SideSpikeTag:
+            case Tags.SideSpike:
                 moveKind = SpikeMove.LeftRight;
                 initPosition = transform.position.x;
                 SetRange(initPosition);

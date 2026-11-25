@@ -5,9 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(MeshRenderer), typeof(Collider))]
 public class Drag : MonoBehaviour
 {
-    private const string WallTag = "Wall_D";
-    private const string UIManagerName = "UIManager";
-
     [SerializeField] private GameObject correctPos;
     [SerializeField] private GameObject originalPos;
     [SerializeField] private string destinationTag = "DropArea";
@@ -51,7 +48,7 @@ public class Drag : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // 1. 벽에 닿으면 처음 위치로 돌려보낸다
-        if (other.CompareTag(WallTag))
+        if (other.CompareTag(Tags.DragWall))
         {
             transform.position = originalPos.transform.position;
         }
@@ -62,7 +59,7 @@ public class Drag : MonoBehaviour
             transform.position = correctPos.transform.position;
             isDrag = false;
 
-            Stage2UI ui = GameObject.Find(UIManagerName).GetComponent<Stage2UI>();
+            Stage2UI ui = GameObject.Find(ObjectNames.UIManager).GetComponent<Stage2UI>();
             ui.AddCorrect();
         }
     }

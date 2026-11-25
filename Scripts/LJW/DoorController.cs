@@ -3,15 +3,13 @@ using UnityEngine;
 // 튜토리얼 문. 가까이서 상호작용하면 문이 열렸다가 1초 뒤 콜라이더가 다시 켜진다. 한 번만 작동한다.
 public class DoorController : MonoBehaviour
 {
-    private const string PlayerTag = "Player";
-    private const string InteractionButton = "Interaction";
     private const string DoorOpenState = "DoorOpen";
-    private const float ColliderOnDelay = 1f;
 
     [SerializeField] private GameObject instruction;
     [SerializeField] private GameObject animObject;
     [SerializeField] private MeshCollider[] door;
     [SerializeField] private AudioClip openSound;
+    [SerializeField] private float colliderOnDelay = 1f;
 
     private Animator doorAnim;
     private AudioSource audioSource;
@@ -27,7 +25,7 @@ public class DoorController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(PlayerTag) && hasOpened == false)
+        if (other.CompareTag(Tags.Player) && hasOpened == false)
         {
             instruction.SetActive(true);
             canOpen = true;
@@ -42,7 +40,7 @@ public class DoorController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown(InteractionButton) == false) return;
+        if (Input.GetButtonDown(InputNames.Interaction) == false) return;
         if (canOpen == false) return;
 
         doorAnim.Play(DoorOpenState);
@@ -51,7 +49,7 @@ public class DoorController : MonoBehaviour
         canOpen = false;
 
         SetDoorColliders(false);
-        Invoke(nameof(DoorColliderOn), ColliderOnDelay);
+        Invoke(nameof(DoorColliderOn), colliderOnDelay);
 
         hasOpened = true;
     }

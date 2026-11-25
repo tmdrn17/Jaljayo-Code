@@ -3,8 +3,6 @@ using UnityEngine;
 // 플레이어가 밟으면 잠시 뒤 떨어지고, 일정 시간 뒤 사라지는 발판
 public class FallingPlatform : MonoBehaviour
 {
-    private const string PlayerName = "Player";
-
     [SerializeField] private float fallSec = 0.5f;
     [SerializeField] private float destroySec = 2f;
 
@@ -17,7 +15,7 @@ public class FallingPlatform : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name.Equals(PlayerName))
+        if (collision.gameObject.name.Equals(ObjectNames.Player))
         {
             Invoke(nameof(FallPlatform), fallSec);
             Destroy(gameObject, destroySec);

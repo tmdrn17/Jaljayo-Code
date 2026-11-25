@@ -4,8 +4,6 @@ using UnityEngine;
 // 공개 멤버(wall, WallMove)는 다른 스크립트가 쓰므로 이름을 바꾸지 않는다.
 public class Wall : MonoBehaviour
 {
-    private const string DestinationTag = "Destination";
-
     [SerializeField] private float force = 1;
     public GameObject wall;
     public static bool WallMove;
@@ -20,6 +18,6 @@ public class Wall : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(DestinationTag)) Destroy(gameObject);
+        if (other.CompareTag(Tags.Destination)) Destroy(gameObject);
     }
 }

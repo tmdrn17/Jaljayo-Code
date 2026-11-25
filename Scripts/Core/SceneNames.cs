@@ -1,6 +1,7 @@
-// 여러 스크립트가 같이 쓰는 씬 이름. 값은 빌드 세팅(EditorBuildSettings)의 씬 파일 이름과 같다.
+// 코드에서 쓰는 씬 이름. 값은 씬 파일 이름과 같다.
 public static class SceneNames
 {
+    // 빌드 세팅(EditorBuildSettings)에 있는 씬
     public const string Boot = "DontDestruyObjsScene";
     public const string Title = "Title";
     public const string Tutorial = "Tutorial";
@@ -17,4 +18,15 @@ public static class SceneNames
     public const string BossClear = "1FBossClear";
     public const string GameFail = "New_GameFail";
     public const string GameClear = "GameClear";
+
+    // 빌드 세팅에 없는 씬 (옛 스테이지 선택·테스트용). 코드가 이름을 비교하거나 불러오므로 남겨 둔다.
+    public const string MainHall = "MainHall";
+    public const string TestScene = "TestScene";
+    public const string StageFail = "StageFail";
+    public const string StageSelect = "StageSelect";
+    public const string Stage1 = "Stage1";
+    public const string Stage2 = "Stage2";
+    public const string Stage3 = "Stage3";
+    public const string Stage4 = "Stage4";
+    public const string Stage5 = "Stage5";
 }
