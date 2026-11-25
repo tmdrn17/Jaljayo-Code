@@ -2,7 +2,7 @@
 
 > 꿈속의 공간을 탐험하며 퍼즐과 장애물을 해결하고, 보스에 도전하는 3D 탈출 어드벤처
 
-![프로젝트 로고](images/jaljayo_logo.png)
+<img width="1280" height="720" alt="jaljayo_title" src="https://github.com/user-attachments/assets/5d0013f5-ccd9-4cb7-b14c-60236e36937d" />
 
 > **코드 공개용 저장소입니다.** 원본 Unity 프로젝트에서 현재 사용 중인 C# 스크립트를 옮겼습니다. 씬·프리팹·모델·텍스처·사운드 등 프로젝트 에셋과 빌드 파일은 포함하지 않습니다.
 > 따라서 이 저장소만으로 Unity에서 게임을 바로 실행할 수는 없습니다.
