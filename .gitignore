@@ -1,0 +1,45 @@
+# Unity-generated folders
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+
+# Metadata is unnecessary in this code-only repository
+*.meta
+
+# Unity scenes, prefabs, models, materials, animations and media assets
+*.fbx
+*.FBX
+*.blend
+*.obj
+*.prefab
+*.unity
+*.mat
+*.anim
+*.controller
+*.asset
+*.wav
+*.mp3
+*.ogg
+*.psd
+*.tga
+*.mp4
+*.dll
+
+# Secrets
+*.keystore
+*.jks
+*.env
+
+# IDE
+.vs/
+.idea/
+.vscode/
+*.csproj
+*.sln
+*.user
+.DS_Store
+Thumbs.db
