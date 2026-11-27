@@ -49,9 +49,24 @@ Scripts/
 └── 플레이어·퍼즐·스테이지 관련 스크립트
 images/
 └── jaljayo_logo.png
+docs/refactoring/
+└── 2026 리팩터링 때 AI(Claude Code)에게 준 기준 문서와 작업 기록
 ```
 
 현재 사용 중인 C# 스크립트 총 **70개**를 옮겼습니다. 세부 경로와 파일은 저장소에서 확인할 수 있습니다.
+
+## 리팩터링 기준 문서
+
+2026년 v2 리팩터링에서 Claude Code에게 준 기준과 작업 기록입니다. 문서 안의 `Assets/...` 경로는 원본 Unity 프로젝트 기준입니다.
+
+| 문서 | 내용 |
+|---|---|
+| [style.md](docs/refactoring/style.md) | 코드 스타일 · 구조 기준 (1차: `코딩스타일.md` 1~11번, 2차: 구조 기준 · 판단 기준 추가) |
+| [SKILL.md](docs/refactoring/SKILL.md) | 세션마다 따른 작업 규칙 (동작 유지, 씬 · 프리팹 연결, 동시 작업) |
+| [sessions.md](docs/refactoring/sessions.md) | 세션 나누기, 모델 배정, 동결 · 약속 API |
+| [상수_관리_정리.md](docs/refactoring/상수_관리_정리.md) | 2차 뒤 상수 재점검과 정리 |
+| [상수_모음_static_class_선택_이유.md](docs/refactoring/상수_모음_static_class_선택_이유.md) | 상수 모음을 struct가 아닌 static class로 만든 이유 |
+| [리팩토링_결과.md](docs/refactoring/리팩토링_결과.md) | 파일별 변경 기록 (Claude Code가 작업하며 남김) |
 
 ## 사용 라이브러리 · 패키지
 
